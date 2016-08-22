@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Maximum Alert</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/landing-page.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+	
+    <link rel="stylesheet" href="stylesheets/stylesheet.css" />
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+    <link rel="stylesheet" href="stylesheets/leaflet.awesome-markers.css">
+    <link rel="stylesheet" href="stylesheets/L.Control.Pan.css">
+	<link rel="stylesheet" href="css/leaflet-search.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	 <link href='https://fonts.googleapis.com/css?family=Playfair+Display:700,900|Fira+Sans:400,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
+    <link rel="stylesheet" href="css/style.css"> 
+
+</head>
+
+<body>
+	<div id ="leftpanel">
+	<div style="text-align:center;"><img src="img/logo.png" style="height:70px"/></div>
+	 <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">1. Introduction</a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <p>In light of the recent terrorist events, this project attempts to use geospatial technologies to analyse the trends and patterns of terrorism activities within 2010 and 2014 (5 years) timeframe and understand its possible implications to Singapore. While so, we hope that this tool serves as an educational tool to show the damage terrorism have done and why it should not be taken lightly.</p><p></br>
+                    This project was built by 3 Singapore Management University student as their Geospatial Analytics module assignment.</p> <br/> Reach out to us at <a href="mailto:maximumalert@outlook.com">maximumalert@outlook.com</a> 
+ </p></br>
+					<p><span class="glyphicon glyphicon-upload"></span> Allows you to upload GeoJson/KML files for dynamic visualisation</p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" value="moran" class="overlay">2. Attack Patterns (Moran's I)</a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <b>Mouse over contients to see Moran's I score.</b>
+                    <p>To better understand terrorist activities around the globe, Moran’s I (Index) is used to measure the spatial autocorrelation of terrorist attacks within each continent. Where if Moran's Index tends towards 1 would mean attacks exhibits a clustering pattern, tending towards -1 would mean a dispersed pattern and 0 typically indicates no autocorrelation. </br></br> We found that, Asia, with a Moran's Index of -0.0298 has <b>no autocorrelation</b>. This means attacks exhibits a random pattern, therefore, Moran's I would serve as an unclear indicator to access the risk of a terrorist attack on Singapore. IN this case, this turns out inclucsive as to accessing the likelyhood of an attack in Singapore. </br></br> The group then decided to further explore the likely hood of these attack utilizing a multiple regress method. From our research, we identified 4 different attribute of a country that is said to have a correlation with terrorist attacks. These 4 attributes are, GDP per Capita, GINI Index, Poverty Index and Political Freedom Index. A multiple regression analysis is then performed on the training dataset (countries who have been attacked by terrorist) before applying it to Singapore’s model. </br></br>
+
+                    Of the 4 attributes, Political Freedom Index is the biggest deciding factor in a terrorist attack. Applying the model to Singapore, we found that Singapore is <b>unlikely </b>to be under a terrorist attack. To view the model, please click <a href="javascript:void(0)" id="regressionHref"> here</a>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" value="twitter" class="overlay">3. Terrorist Online Activities (Twitter Monitoring)</a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p>In this era of technological advancement, we wish to capture online information regarding terrorist activities so as to facilitate a better understanding towards the issue of terrorism in the virtual world. As such, we have decided to crawl the data of tweets regarding terrorism before plotting into the map so as to provide a visual representation of these terrorist activities. </p>
+                </div>
+            </div>
+        </div>
+		<div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" value="ahp" class="overlay">4. Danger Areas in Singapore  (Analytics Hierarchy Process + Grid Vector)</a>
+                </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p>To identify the danger areas in Singapore, we used AHP as a method to simulate a terrorist choice of a target. This is done by first choosing 6 popular terrorist targets (military, police, education institutes, religious venue, government agencies and transport system) as elements of the AHP model. Thereafter, priorities are established using the frequencies of attack on these 6 elements. These targets are then collected and plotted around the map of Singapore. Finally, a grid vector of 1km is then plotted before tabulating the score of each grid. The scores are then tabulated and visualized where darked shades of the color symbolizes greater danger. </p>
+                </div>
+            </div>
+        </div>
+		<div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive" value="terroristattack" class="overlay">5. Terrorist Attacks vs Killed & Wounded (2010-2014)</a>
+                </h4>
+            </div>
+            <div id="collapseFive" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <b><p>Mouse over to see more information about terrorist attacks</p></b>
+                    <p>This layer of the map provides an overview of terrorist attacks around the world. Interestingly, some countries though with a larger amount of attacks as compared to others have the same amount of killed and wounded victims. As such, we can infer that the number of terrorism attacks and killed & wounded victims do not share a linear relationship. 
+                </div>
+            </div>
+        </div>
+		<div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix" value="terroristGroups" class="overlay">6. Terrorist Groups Attacking Patterns (2010-2014)</a>
+                </h4>
+            </div>
+            <div id="collapseSix" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <b>Please click on each bar to observe the terrorist groups attacking pattern</b> 
+                    <p>This segments is an display of the different countries each terrorist groups have attacked through out the 5 years.</p>
+   
+				    <div id="chartdivTerroristGrp" style="width: 100%; height:300px; background-color: #FFFFFF;" ></div>
+                    <p>From this, we can infer most terror groups' attacks exhibits that of an clustering pattern. As such, though they are accountable for majority of the terrorist attacks, because of such clustered attacking patterns, Singapore would be less likely a target as compared to terror groups like "Separatists" and "Muslim Fundamentalists". This is because these groups displayed a more dispersed pattern and are more likely to venture into countries that are not familiar with. Moreover, these groups had executed its terrorist acts near Singapore. It is likely that such groups could be held responsible for attacks on Singapore if one were to happen.  
+				</div>
+            </div>
+        </div>
+		<div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" value="terroristattacksbyyear" value="2010" class="overlay">7. Terrorist Attacks by Year (2010 - 2014)</a>
+                </h4>
+            </div>
+            <div id="collapseSeven" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p> This provides a visualization of a year on year terrorist attacks through a span of 5 years. From this we can understand how terrorism's trends & patterns are evolving to focus on the different countries. </p>
+                    <!-- <button id="play">Play</button> -->
+                      <section class="cd-horizontal-timeline" style="margin-left:40px">
+                            <div class="timeline">
+                                    <div class="events-wrapper">
+                                            <div class="events">
+                                                    <ol>
+                                                            <li><a data-date="01/01/2010" class="overlay selected" value="2011">2010</a></li>
+                                                            <li><a data-date="01/01/2011" class="overlay" value="2011">2011</a></li>
+                                                            <li><a data-date="01/01/2012" class="overlay" value="2012">2012</a></li>
+                                                            <li><a data-date="01/01/2013" class="overlay" value="2013">2013</a></li>
+                                                            <li><a data-date="01/01/2014" class="overlay" value="2014">2014</a></li>
+                                                    </ol>
+                                                    <span class="filling-line" aria-hidden="true"></span>
+                                            </div> <!-- .events -->
+                                    </div> <!-- .events-wrapper -->
+
+                            </div> <!-- .timeline -->
+
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseEight" id="interestingInsights" class="overlay">8. Other Interesting Insights</a>
+                </h4>
+            </div>
+            <div id="collapseEight" class="panel-collapse collapse">
+                <div class="panel-body">
+                </div>
+            </div>
+        </div>
+    </div>
+	<p><strong>Note:</strong> Click on the linked heading text to expand or collapse accordion panels.</p>
+	
+	</div>
+    <div id="map" style="background-color:#B6D2ED;"></div>
+    <!-- Page Content -->
+
+    <a  name="extraInfo"></a>
+    <div class="content-section-a" id="interestingInsightsDiv">
+
+                <!-- <h2 style="margin-left:10%" class="section-heading">Why we should care?</h2> -->
+                <div style="background-color:#f8f8f8;">
+                    <div id="chart1div" style="width: 1000px; height: 400px; margin-left:auto; margin-right:auto;"></div>
+                    </div>
+
+
+        <!— /.container —>
+
+    </div>
+    <!— /.content-section-a —>
+
+    <div class="content-section-b">            
+                <!-- <h2 style="margin-left:10%" class="section-heading">Top 5 destructive methods of attacking (2010-2014)</h2> -->
+                <div id="chartdiv2" style="margin-left:auto; margin-right:auto; width: 800px; height: 400px;" ></div>
+                
+
+        <!— /.container —>
+
+    </div>
+    <!— /.content-section-b —>
+
+    <div class="content-section-a" style="text-align:center;">
+                <!-- <h2 style="margin-left:10%" class="section-heading">Effectiveness of the Top 2 Methods of Attacking</h2> -->
+                <img style="margin-left:auto; margin-right:auto; width:1000px"class="img-responsive" src="img/AttackMethodEffectivness.png" alt="">
+        <!— /.container —>
+
+    </div>
+    
+    <div class="content-section-b" style="text-align:center;">
+
+                <!-- <h2 style="margin-left:10%" class="section-heading"><b>Number of Victims vs. Number of Terrorists</b></h2> -->
+                <img style="margin-left:auto; margin-right:auto; width:1000px" class="img-responsive" src="img/terroristVSvictims.png" alt="">
+        <!— /.container —>
+
+    </div>
+    
+    <div class="content-section-b" id="regressionModel" style="text-align:center;">
+
+                <h2 style="margin-left:10%" class="section-heading">Multiple Regression</h2>
+                <img style="margin-left:auto; margin-right:auto; width:1000px" class="img-responsive" src="img/regression.PNG" alt="">
+        <!— /.container —>
+
+    </div>
+    <!— /.content-section-a —>
+    <!-- /.content-section-a -->
+
+
+
+    <!-- jQuery -->
+    <script src="js/amcharts.js" type="text/javascript"></script>
+    <script src="js/serial.js" type="text/javascript"></script>
+    <script src="js/themes/light.js" type="text/javascript"></script>
+    <script src="js/chart1.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://www.amcharts.com/lib/3/pie.js"></script>
+    <script src="js/chart2.js" type="text/javascript"></script>
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <script src="javascripts/leaflet.awesome-markers.min.js"></script>
+    <script src="http://d3js.org/queue.v1.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>   
+    <script src="javascripts/L.Control.Pan.js"></script>
+    <script src="javascripts/leaflet-app.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/leaflet-search.js"></script>
+	<script src="js/leaflet.filelayer.js"></script>
+	<script src="togeojson/togeojson.js"></script>
+	<script src="ammap/ammap.js"></script>
+	 <script src="js/jquery-2.1.4.js"></script>
+    <script src="js/jquery.mobile.custom.min.js"></script>
+    <script src="js/main.js"></script> <!-- Resource jQuery -->
+	 <script src="js/modernizr.js"></script> <!-- Modernizr -->
+	
+<script>
+
+$("#regressionHref").click(function() {
+    $('html, body').animate({
+        scrollTop: $("#regressionModel").offset().top
+    }, 2000);
+});
+
+$("#interestingInsights").click(function() {
+    $('html, body').animate({
+        scrollTop: $("#interestingInsightsDiv").offset().top
+    }, 2000);
+});
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,192 @@
+
+
+
+
+<script>
+  function initChart() {
+            var chart = AmCharts.makeChart("chartdivTerroristGrp",
+      {
+    "type": "serial",
+    "categoryField": "category",
+    "autoMarginOffset": 11,
+    "startDuration": 1,
+    "fontSize": 10,
+    "categoryAxis": {
+        "autoRotateAngle": 61.2,
+        "autoRotateCount": 1,
+        "gridPosition": "start",
+        "dashLength": 6,
+        "gridAlpha": 1
+    },
+    "trendLines": [],
+    "graphs": [
+        {
+            "balloonColor": "#90B000",
+            "balloonText": "<b>[[category]]</b>:[[value]] kills",
+            "columnWidth": 0.52,
+            "fillAlphas": 1,
+            "id": "AmGraph-1",
+            "legendAlpha": 0,
+            "lineColor": "#9F1616",
+            "lineThickness": 0,
+            "maxBulletSize": 45,
+            "title": "graph 1",
+            "type": "column",
+            "valueField": "column-1"
+        }
+    ],
+    
+    "exportConfig":{
+      "menuTop": 0,
+      "menuItems": [{
+      "icon": '/lib/3/images/export.png',
+      "format": 'png'     
+      }]  
+    },
+    "guides": [],
+    "valueAxes": [
+        {
+            "id": "ValueAxis-1",
+            "autoRotateAngle": 0,
+            "title": "Kills"
+        }
+    ],
+    "allLabels": [],
+    "balloon": {},
+    "titles": [
+        {
+            "id": "Title-1",
+            "size": 12,
+            "text": "Terrorist Groups Attacks Trends (2010 - 2014)"
+        }
+    ],
+
+    "dataProvider": [
+        {
+            "category": "Taliban",
+            "column-1": "3041"
+        },
+        {
+            "category": "Islmaic State of Iraq and the Levant",
+            "column-1": "1481"
+        },
+        {
+            "category": "Al-Shabaab",
+            "column-1": "1292"
+        },
+        {
+            "category": "Boko Haram",
+            "column-1": "1197"
+        },
+        {
+            "category": "Tehrik-i-Taliban Pakistan",
+            "column-1": "759"
+        },
+        {
+            "category": "Al-Qa`ida in the Arabian Peninsula",
+            "column-1": "725"
+        },
+        {
+            "category": "New People's Army",
+            "column-1": "659"
+        },
+        {
+            "category": "Maoists",
+            "column-1": "577"
+        },
+        {
+            "category": "Revolutionary Armed Forces of Colombia",
+            "column-1": "551"
+        },
+        {
+            "category": "Al-Qa`ida in Iraq",
+            "column-1": "444"
+        },
+        {
+            "category": "Donetsk People's Republic",
+            "column-1": "294"
+        },
+        {
+            "category": "Separatists",
+            "column-1": "256"
+        },
+        {
+            "category": "Muslim Fundamentalists",
+            "column-1": "229"
+        },
+        {
+            "category": "Kurdistan Workers' Party",
+            "column-1": "198"
+        },
+        {
+            "category": "Fulani Militants",
+            "column-1": "176"
+        }
+    ]
+}
+);
+
+            chart.addListener("clickGraphItem", handleClick)
+
+            function handleClick(event){
+
+            removeTerroristGroupMaps();
+            var selectedGroup = event.item.category;
+
+            switch (selectedGroup) {
+            case "Taliban":
+                taliban_l.addTo(map);
+                break;
+            case "Islmaic State of Iraq and the Levant":
+                isil_l.addTo(map);
+                break;
+            case "Al-Shabaab":
+                alshabaab_l.addTo(map);
+                break;
+            case "Boko Haram":
+                bokoharam_l.addTo(map);
+                break;
+            case "Tehrik-i-Taliban Pakistan":
+                ttp_l.addTo(map);
+                break;
+            case "Al-Qa`ida in the Arabian Peninsula":
+                aqap_l.addTo(map);
+                break;
+            case "New People's Army":
+                npa_l.addTo(map);
+                break;
+            case "Maoists":
+                maoists_l.addTo(map);
+                break;
+            case "Revolutionary Armed Forces of Colombia":
+                farc_l.addTo(map);
+                break;
+            case "Al-Qa`ida in Iraq":
+                alqaidainiraq_l.addTo(map);
+                break;
+            case "Donetsk People's Republic":
+                donetsk_l.addTo(map);
+                break;
+            case "Separatists":
+                seperatists_l.addTo(map);
+                break;
+            case "Muslim Fundamentalists":
+                muslimfund_l.addTo(map);
+                break;
+            case "Kurdistan Workers' Party":
+                pkk_l.addTo(map);
+                break;
+            case "Fulani Militants":
+                fulani_l.addTo(map);
+                break;
+            
+        }    
+            }
+    };
+    //END of add graph
+
+
+
+    initChart(); 
+	
+	</script>
