@@ -313,15 +313,15 @@ function makeMyMap(error, moran, twitter, grid,terroristattack, taliban, isil, a
 
     //interactive census
     function getColor(d) {
-        return  d > 633 ? '#4d0017' :
-                d > 160 ? '#67001e' :
-                d > 128 ? '#800026' :
-                d > 101  ? '#BD0026' :
-                d > 67  ? '#E31A1C' :
-                d > 43  ? '#FC4E2A' :
-                d > 26   ? '#FD8D3C' :
-                d > 10 ? '#FEB24C' :
-                d > 1   ? '#FED976' :
+        return  d > 20 ? '#4d0017' :
+                d > 18 ? '#67001e' :
+                d > 12 ? '#800026' :
+                d > 8  ? '#BD0026' :
+                d > 4.5  ? '#E31A1C' :
+                d > 2.5  ? '#FC4E2A' :
+                d > 1.5   ? '#FD8D3C' :
+                d > 1 ? '#FEB24C' :
+                d > 0.5   ? '#FED976' :
                            '#FFEDA0';
     }
 	
